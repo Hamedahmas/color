@@ -1,62 +1,51 @@
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-  <meta charset="UTF-8">
-  <title>🎉 Party Popper Effect</title>
-  <style>
-    body {
-      margin: 0;
-      background: #f7f7f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    #popper-container img {
-      width: 150px;
-      height: auto;
-      cursor: pointer;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 999;
-    }
-  </style>
-</head>
-<body>
-
-<!-- ظرف عکس 🎉 -->
-<div id="popper-container">
+<!-- 🎉 نمایش آیکن در گوشه بالا چپ -->
+<div id="popper-wrapper">
   <img id="popper" src="party-popper-static.png" alt="🎉 Popper">
 </div>
 
-<!-- بوم کنفتی -->
+<!-- بوم افکت کنفتی -->
 <canvas id="confetti-canvas"></canvas>
 
 <!-- کتابخانه کنفتی -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+  #popper-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+  }
+
+  #popper-wrapper img {
+    width: 50px;
+    height: auto;
+    cursor: pointer;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+</style>
 
 <script>
   const popperImg = document.getElementById('popper');
 
   popperImg.addEventListener('click', () => {
     const img = document.getElementById('popper');
-    img.src = 'party-popper_1f389.gif'; // پخش گیف
+    img.src = 'party-popper_1f389.gif'; // نمایش گیف
 
-    // بعد 1 ثانیه، بازگشت به حالت استاتیک
     setTimeout(() => {
-      img.src = 'party-popper-static.png';
+      img.src = 'party-popper-static.png'; // برگشت به حالت استاتیک
     }, 1000);
 
-    // افکت کنفتی با کیفیت بالا
+    // اجرای کنفتی
     const duration = 2500;
     const animationEnd = Date.now() + duration;
     const defaults = {
@@ -89,6 +78,3 @@
     }, 100);
   });
 </script>
-
-</body>
-</html>
