@@ -16,6 +16,7 @@
 
     #popper {
       width: 150px;
+      height: auto;
       cursor: pointer;
     }
 
@@ -32,23 +33,32 @@
 </head>
 <body>
 
-<img id="popper" src="party-popper_1f389.gif" />
+<!-- گیف 🎉 -->
+<img id="popper" src="party-popper_1f389.gif" alt="🎉 Party Popper">
 
+<!-- بوم افکت کنفتی -->
 <canvas id="confetti-canvas"></canvas>
 
+<!-- کتابخانه canvas-confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
   const popper = document.getElementById('popper');
 
   popper.addEventListener('click', () => {
-    // ✅ ریست گیف برای پخش مجدد
+    // 🔁 ریست گیف برای پخش مجدد
     const newPopper = popper.cloneNode(true);
     popper.replaceWith(newPopper);
 
-    // ✅ افکت کنفتی حرفه‌ای
+    // 🎊 افکت کنفتی حرفه‌ای
     const duration = 3000;
     const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+    const defaults = {
+      startVelocity: 30,
+      spread: 360,
+      ticks: 60,
+      zIndex: 1000
+    };
 
     function randomInRange(min, max) {
       return Math.random() * (max - min) + min;
@@ -59,10 +69,11 @@
 
       if (timeLeft <= 0) {
         clearInterval(interval);
+        return;
       }
 
       confetti({
-        particleCount: 8,
+        particleCount: 7,
         angle: randomInRange(55, 125),
         spread: 70,
         origin: { x: Math.random(), y: 0 },
