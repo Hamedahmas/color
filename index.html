@@ -33,30 +33,38 @@
 </head>
 <body>
 
-<!-- گیف 🎉 -->
-<img id="popper" src="party-popper_1f389.gif" alt="🎉 Party Popper">
+<!-- تصویر استاتیک اولیه -->
+<img id="popper" src="party-popper-static.png" alt="🎉 Popper">
 
-<!-- بوم افکت کنفتی -->
+<!-- افکت کنفتی -->
 <canvas id="confetti-canvas"></canvas>
 
-<!-- کتابخانه canvas-confetti -->
+<!-- کتابخانه افکت کنفتی -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
   const popper = document.getElementById('popper');
 
   popper.addEventListener('click', () => {
-    // 🔁 ریست گیف برای پخش مجدد
+    // جایگزینی با گیف برای پخش
     const newPopper = popper.cloneNode(true);
+    newPopper.src = 'party-popper_1f389.gif'; // شروع گیف
     popper.replaceWith(newPopper);
 
-    // 🎊 افکت کنفتی حرفه‌ای
-    const duration = 3000;
+    // بعد از ۱ ثانیه، بازگشت به تصویر استاتیک
+    setTimeout(() => {
+      const staticPopper = newPopper.cloneNode(true);
+      staticPopper.src = 'party-popper-static.png';
+      newPopper.replaceWith(staticPopper);
+    }, 1000);
+
+    // 🎊 افکت کنفتی قوی
+    const duration = 2500;
     const animationEnd = Date.now() + duration;
     const defaults = {
-      startVelocity: 30,
+      startVelocity: 45,
       spread: 360,
-      ticks: 60,
+      ticks: 90,
       zIndex: 1000
     };
 
@@ -66,21 +74,21 @@
 
     const interval = setInterval(() => {
       const timeLeft = animationEnd - Date.now();
-
       if (timeLeft <= 0) {
         clearInterval(interval);
         return;
       }
 
       confetti({
-        particleCount: 7,
+        particleCount: 10,
         angle: randomInRange(55, 125),
         spread: 70,
         origin: { x: Math.random(), y: 0 },
         colors: ['#f94144', '#f3722c', '#f9c74f', '#90be6d', '#43aa8b', '#577590'],
+        scalar: 1.2, // اندازه بیشتر
         ...defaults
       });
-    }, 100);
+    }, 80);
   });
 </script>
 
